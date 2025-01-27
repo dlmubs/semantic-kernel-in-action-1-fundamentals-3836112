@@ -8,4 +8,14 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="microsoft.semantickernel" Version="1.34.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+  <Content Include="plugins\**\*.*">
+    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+  </Content>
+  </ItemGroup>
+
 </Project>
