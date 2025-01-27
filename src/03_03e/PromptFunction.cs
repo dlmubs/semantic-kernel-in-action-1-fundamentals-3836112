@@ -4,11 +4,11 @@ namespace _03_03e;
 
 public class PromptFunction
 {
-  private static string someText = "Effective prompt design is essential to achieving desired outcomes with LLM AI models. Prompt engineering, also known as prompt design, is an emerging field that requires creativity and attention to detail. It involves selecting the right words, phrases, symbols, and formats that guide the model in generating high-quality and relevant texts.\r\n\r\nIf you've already experimented with ChatGPT, you can see how the model's behavior changes dramatically based on the inputs you provide. For example, the following prompts produce very different outputs:";
+  private static string someText =  "Schopenhauer entwarf eine Lehre, die gleichermaßen Erkenntnistheorie, Metaphysik, Ästhetik und Ethik umfasst. Er sah sich selbst als Schüler und Vollender Immanuel Kants, dessen Philosophie er als Vorbereitung seiner eigenen Lehre auffasste. Weitere Anregungen bezog er aus der Ideenlehre Platons und aus Vorstellungen indischer Philosophien. Innerhalb der Philosophie des 19. Jahrhunderts entwickelte er eine eigene Position des subjektiven Idealismus und vertrat als einer der ersten Philosophen im deutschsprachigen Raum die Überzeugung, dass der Welt ein irrationales Prinzip zugrunde liegt.";
 
   public static async Task Execute()
   {
-    var modelDeploymentName = "Gpt4v32k";
+    var modelDeploymentName = "gpt-35-turbo";
     var azureOpenAIEndpoint = Environment.GetEnvironmentVariable("AZUREOPENAI_ENDPOINT");
     var azureOpenAIApiKey = Environment.GetEnvironmentVariable("AZUREOPENAI_APIKEY");
 
@@ -16,12 +16,12 @@ public class PromptFunction
     builder.Services.AddAzureOpenAIChatCompletion(
         modelDeploymentName,
         azureOpenAIEndpoint,
-        azureOpenAIApiKey,
-        modelId: "gpt-4-32k"
+        azureOpenAIApiKey
+        // modelId: "gpt-4-32k"
     );
     var kernel = builder.Build();
 
-    await CreateAndExecuteAPrompt(kernel);
+    // await CreateAndExecuteAPrompt(kernel);
     await ImportPluginFromFolderAndExecuteIt(kernel);
 
     Console.ReadLine();
