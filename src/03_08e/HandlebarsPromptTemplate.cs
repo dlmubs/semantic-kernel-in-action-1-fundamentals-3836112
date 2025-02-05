@@ -6,7 +6,7 @@ public class HandlebarsPromptTemplate
 {
   public static async Task Execute()
   {
-    var modelDeploymentName = "Gpt4v32k";
+    var modelDeploymentName = "gpt-35-turbo";
     var azureOpenAIEndpoint = Environment.GetEnvironmentVariable("AZUREOPENAI_ENDPOINT");
     var azureOpenAIApiKey = Environment.GetEnvironmentVariable("AZUREOPENAI_APIKEY");
 
@@ -14,14 +14,14 @@ public class HandlebarsPromptTemplate
     builder.Services.AddAzureOpenAIChatCompletion(
         modelDeploymentName,
         azureOpenAIEndpoint,
-        azureOpenAIApiKey,
-        modelId: "gpt-4-32k"
+        azureOpenAIApiKey
+        // modelId: "gpt-4-32k"
     );
     builder.Plugins.AddFromType<WhatTimeIsIt>();
     var kernel = builder.Build();
 
     // Create agenda
-    List<string> todaysCalendar = ["8am - wakeup", "9am - work", "12am - lunch", "1pm - work", "6pm - exercise", "7pm - study", "10pm - sleep"];
+    List<string> todaysCalendar = ["8am - aufstehen",  "12am - mittagsessen", "10pm - schlafen"];
 
     var handlebarsTemplate = @"
                     Please explain in a fun way the day agenda
@@ -29,10 +29,10 @@ public class HandlebarsPromptTemplate
                     {{ set ""whatTimeIsIt"" (WhatTimeIsIt-Time) }}
 
                     {{#each dayAgenda}}
-                        Explain what you are doing at {{this}} in a fun way.
+                        Explain what you are doing at {{this}} in a weird way.
                     {{/each}}
 
-                    Explain what you will be doing next at {{whatTimeIsIt}} in a fun way.";
+                    Explain what you will be doing next at {{whatTimeIsIt}} in a weird way.";
 
     // Create handlebars template for intent
     var handlebarsFunction = kernel.CreateFunctionFromPrompt(
